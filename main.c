@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
 {
 	FILE *fileus;
 	char *filename;
+	stack_t *header = NULL;
 
 	if (argc != 2)
 	{
@@ -29,4 +30,17 @@ int main(int argc, char *argv[])
 
 
 return (0);
+}
+
+/**
+ *filereder - read file lines and pass them to fun_select
+ *
+ *
+ *
+ */
+int filereader(FILE *fileus, stack_t **header)
+{
+
+
+
 }
