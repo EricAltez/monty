@@ -7,9 +7,10 @@
  */
 int main(int argc, char *argv[])
 {
-	FILE *fileus;
-	char *filename;
+	FILE *fp;
+	char *filename, *line = NULL;
 	stack_t *header = NULL;
+	size_t len = 0;
 
 	if (argc != 2)
 	{
@@ -17,30 +18,23 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	filename = argv[1];
-	fileus = fopen(filename, "r");
+	fp = fopen(filename, "r");
 
-	if (fileus == NULL)
+	if (fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
+	while (getline(&line, &len, fp) != -1)
+	{
+		fun_select(strtok(*line));
+	}
 
 
 
-
-
+	fclose(fp);
+	free(line);
 return (0);
 }
 
-/**
- *filereder - read file lines and pass them to fun_select
- *
- *
- *
- */
-int filereader(FILE *fileus, stack_t **header)
-{
 
-
-
-}
