@@ -8,10 +8,7 @@
 int main(int argc, char *argv[])
 {
 	FILE *fp;
-	char *filename, *line = NULL, *token = NULL, command[20];
-	int data;
-	stack_t *header = NULL;
-	size_t len = 0;
+	char *filename, *line = NULL, *line_ad;
 
 	if (argc != 2)
 	{
@@ -25,38 +22,26 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-	while (getline(&line, &len, fp) != -1)
-	{
-		token = strtok(line, " ");
-		if (token == NULL)
-		{
-			fprintf(stderr, "No token found");
-			exit(EXIT_FAILURE);
-		}
-		strcpy(command, token);
-		token = strtok(NULL, " ");
-		if (token == NULL)
-		{
-			fprintf(stderr, "No second token found");
-			exit(EXIT_FAILURE);
-		}
-		data = atoi(token);
-	}
+	*line_ad = *line;
+	f_reader(line_ad, fp);
 	fclose(fp);
 	free(line);
 return (0);
 }
 /**
- *fun_select - select function to use
- *
- *
- *
+ *f_reader - reads and tokenize file line by line
+ *@line: line pointer
+ *@fp: file
+ *Return: 0
  */
-void fun_select(char *command, unsigned int line_num, stack_t **header)
+int f_reader(char *line, FILE *fp)
 {
-	int idx;
-
-	instruction_t instruction_list[] = {
+	char *token = NULL;
+	int data;
+	size_t len = 0;
+	int i;
+	stack_t *stack;
+	instruction_t op_list[] = {
 		{"push", m_push},
 		{"pop", m_pop},
 		{"pall", m_pall},
@@ -65,23 +50,24 @@ void fun_select(char *command, unsigned int line_num, stack_t **header)
 		{"nop", m_nop},
 		{"add", m_add},
 		{NULL, NULL}
-
 	};
 
-	for (idx = 0; instruction_list[idx].opcode; idx++)
+	while (getline(&line, &len, fp) != -1)
 	{
-		if (strncmp(command, instruction_list[idx].opcode, strlen(command)) == 0)
+		token = strtok(line, " ");
+		if (token == NULL)
 		{
-			instruction_list[idx].f(header, line_num);
-			break;
+			fprintf(stderr, "No token found");
+			exit(EXIT_FAILURE);
 		}
+		while (op_list[i].opcode)
+		{
+			if (strcmp(token, op_list[i].opcode))
+			{
+				op_list[i].f(&stack, line_number);
+			}
+		}
+		/* if */
 	}
-	/* command not found */
-	if (instruction_list[idx].opcode == NULL)
-	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_num, command);
-		free_stack(*header);
-		command = NULL;
-		exit(EXIT_FAILURE);
-	}
+	return (0);
 }
