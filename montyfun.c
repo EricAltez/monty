@@ -40,27 +40,27 @@ void m_pall(stack_t **header, unsigned int line_number)
 	}
 }
 /**
- *
- *
- *
+ *m_pop - removes the top element of the stack
+ *@stack: pointer to stack
+ *@line_number: line number
  */
 void m_pop(stack_t **stack, unsigned int line_number)
 {
 
 }
 /**
- *
- *
- *
+ *m_swap - removes the top element of the stack
+ *@stack: pointer to stack
+ *@line_number: line number
  */
 void m_swap(stack_t **stack, unsigned int line_number)
 {
 
 }
 /**
- *
- *
- *
+ *m_pint - prints the value at the top of the stack, followed by a new line
+ *@stack: pointer to stack
+ *@line_number: line number
  */
 void m_pint(stack_t **stack, unsigned int line_number)
 {
