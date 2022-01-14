@@ -37,7 +37,6 @@ return (0);
 int f_reader(char *line, FILE *fp)
 {
 	char *token = NULL;
-	int data;
 	size_t len = 0;
 	int i;
 	stack_t *stack;

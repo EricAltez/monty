@@ -39,3 +39,30 @@ void m_pall(stack_t **header, unsigned int line_number)
 		tmp = tmp->next;
 	}
 }
+/**
+ *
+ *
+ *
+ */
+void m_pop(stack_t **stack, unsigned int line_number)
+{
+
+}
+/**
+ *
+ *
+ *
+ */
+void m_swap(stack_t **stack, unsigned int line_number)
+{
+
+}
+/**
+ *
+ *
+ *
+ */
+void m_pint(stack_t **stack, unsigned int line_number)
+{
+
+}
