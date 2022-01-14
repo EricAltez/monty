@@ -25,11 +25,8 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	printf("p1");
 	filename = argv[1];
-	printf("p2");
 	fp = fopen(filename, "r");
-	printf("p3");
 	if (fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
@@ -51,13 +48,15 @@ int f_reader(FILE *fp, instruction_t op_list[])
 	unsigned int line_number = 0;
 	char *token = NULL;
 	size_t len = 0;
-	int i = 0, flag = 0;
+	int i = 0, check = 0;
 	stack_t *stack = NULL;
 
 	while (getline(&line, &len, fp) != -1)
 	{
 		token = strtok(line, DELIM);
 		line_number++;
+		i = 0;
+		check = 0;
 		if (token == NULL)
 		{
 			fprintf(stderr, "No token found");
@@ -65,14 +64,15 @@ int f_reader(FILE *fp, instruction_t op_list[])
 		}
 		while (op_list[i].opcode)
 		{
-			if (strcmp(token, op_list[i].opcode))
+			if ((strcmp(token, op_list[i].opcode) == 0) &&
+				strlen(token) == strlen(op_list[i].opcode))
 			{
 				op_list[i].f(&stack, line_number);
-				flag = 1;
+				check = 1;
 			}
 			i++;
 		}
-		if (flag == 0)
+		if (check == 0)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
 			exit(EXIT_FAILURE);

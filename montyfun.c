@@ -22,6 +22,7 @@ void m_push(stack_t **stack, unsigned int line_number)
 	if (*stack)
 		(*stack)->prev = new_node;
 	*stack = new_node;
+	printf("pushfun\n");
 }
 /**
  *m_pall - prints all the values on the stack
@@ -40,6 +41,7 @@ void m_pall(stack_t **stack, unsigned int line_number)
 	{
 		printf("%d\n", aux->n);
 		aux = aux->next;
+		printf("pallpr\n");
 	}
 }
 /**
