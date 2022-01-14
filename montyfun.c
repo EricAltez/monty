@@ -7,7 +7,7 @@
  */
 void m_push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *new_node = malloc(sizeof(*new_node));
+	stack_t *new_node = malloc(sizeof(stack_t));
 
 	(void)line_number;
 
@@ -46,7 +46,9 @@ void m_pall(stack_t **header, unsigned int line_number)
  */
 void m_pop(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
+	printf("pop");
 }
 /**
  *m_swap - removes the top element of the stack
@@ -55,7 +57,9 @@ void m_pop(stack_t **stack, unsigned int line_number)
  */
 void m_swap(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
+	printf("swap");
 }
 /**
  *m_pint - prints the value at the top of the stack, followed by a new line
@@ -64,5 +68,7 @@ void m_swap(stack_t **stack, unsigned int line_number)
  */
 void m_pint(stack_t **stack, unsigned int line_number)
 {
-
+	(void)stack;
+	(void)line_number;
+	printf("pint");
 }

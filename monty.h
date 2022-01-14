@@ -8,6 +8,7 @@
 #include <string.h>
 
 #define DELIM "\t\n "
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -37,6 +38,7 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
 /* Monty functios */
 void m_push(stack_t **stack, unsigned int line_number);
 void m_pall(stack_t **stack, unsigned int line_number);
@@ -45,6 +47,8 @@ void m_pop(stack_t **stack, unsigned int line_number);
 void m_swap(stack_t **stack, unsigned int line_number);
 void m_add(stack_t **stack, unsigned int line_number);
 void m_nop(stack_t **stack, unsigned int line_number);
+
 /* Aux functions */
-int f_reader(char *line, FILE *fp);
+int f_reader(FILE *fp);
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif

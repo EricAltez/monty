@@ -8,37 +8,39 @@
 int main(int argc, char *argv[])
 {
 	FILE *fp;
-	char *filename, *line = NULL;
+	char *filename;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
+	printf("p1");
 	filename = argv[1];
+	printf("p2");
 	fp = fopen(filename, "r");
+	printf("p3");
 	if (fp == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-	f_reader(line, fp);
+	f_reader(fp);
 	fclose(fp);
-	free(line);
 return (0);
 }
 /**
  *f_reader - reads and tokenize file line by line
- *@line: line pointer
  *@fp: file
  *Return: 0
  */
-int f_reader(char *line, FILE *fp)
+int f_reader(FILE *fp)
 {
+	char *line = NULL;
 	unsigned int line_number = 0;
 	char *token = NULL;
 	size_t len = 0;
-	int i;
+	int i = 0;
 	stack_t *stack;
 	instruction_t op_list[] = {
 		{"push", m_push},
@@ -69,5 +71,6 @@ int f_reader(char *line, FILE *fp)
 		}
 		/* if */
 	}
+	free(line);
 	return (0);
 }
