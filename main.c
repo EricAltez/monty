@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
 	FILE *fp;
-	char *filename, *line = NULL, *line_ad;
+	char *filename, *line = NULL;
 
 	if (argc != 2)
 	{
@@ -22,8 +22,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
-	*line_ad = *line;
-	f_reader(line_ad, fp);
+	f_reader(line, fp);
 	fclose(fp);
 	free(line);
 return (0);
