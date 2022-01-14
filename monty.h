@@ -49,6 +49,6 @@ void m_add(stack_t **stack, unsigned int line_number);
 void m_nop(stack_t **stack, unsigned int line_number);
 
 /* Aux functions */
-int f_reader(FILE *fp);
+int f_reader(FILE *fp, instruction_t op_list[]);
 ssize_t getline(char **lineptr, size_t *n, FILE *stream);
 #endif

@@ -25,18 +25,21 @@ void m_push(stack_t **stack, unsigned int line_number)
 }
 /**
  *m_pall - prints all the values on the stack
- *@header: pointer to stack
+ *@stack: pointer to stack
  *@line_number: line number
  */
-void m_pall(stack_t **header, unsigned int line_number)
+void m_pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *tmp = *header;
+	stack_t *aux = NULL;
 	(void)line_number;
 
-	while (tmp)
+	if (!*stack)
+		return;
+	aux = *stack;
+	while (aux)
 	{
-		printf("%d\n", tmp->n);
-		tmp = tmp->next;
+		printf("%d\n", aux->n);
+		aux = aux->next;
 	}
 }
 /**
@@ -48,7 +51,7 @@ void m_pop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	printf("pop");
+	printf("pop\n");
 }
 /**
  *m_swap - removes the top element of the stack
@@ -59,7 +62,7 @@ void m_swap(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	printf("swap");
+	printf("swap\n");
 }
 /**
  *m_pint - prints the value at the top of the stack, followed by a new line
@@ -70,5 +73,5 @@ void m_pint(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	printf("pint");
+	printf("pint\n");
 }
