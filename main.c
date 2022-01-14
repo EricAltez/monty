@@ -36,6 +36,7 @@ return (0);
  */
 int f_reader(char *line, FILE *fp)
 {
+	unsigned int line_number = 0;
 	char *token = NULL;
 	size_t len = 0;
 	int i;
@@ -53,7 +54,7 @@ int f_reader(char *line, FILE *fp)
 
 	while (getline(&line, &len, fp) != -1)
 	{
-		token = strtok(line, " ");
+		token = strtok(line, DELIM);
 		if (token == NULL)
 		{
 			fprintf(stderr, "No token found");
@@ -65,6 +66,7 @@ int f_reader(char *line, FILE *fp)
 			{
 				op_list[i].f(&stack, line_number);
 			}
+			i++;
 		}
 		/* if */
 	}
