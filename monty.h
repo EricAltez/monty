@@ -35,6 +35,9 @@ typedef struct instruction_s
         char *opcode;
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
+/* Monty functios */
+void m_push(stack_t **stack, unsigned int line_number);
+void m_pall(stack_t **header, unsigned int line_number);
+/* Aux functions */
 int f_reader(char *line, FILE *fp);
 #endif
