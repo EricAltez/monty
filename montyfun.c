@@ -17,13 +17,13 @@ void m_push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	argument = strtok(NULL, DELIM);
-	if (argument == NULL || isdigit(argument) == 0)
+	n2 = atoi(argument);
+	if (argument == NULL || isdigit(n2) != 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);
 		exit(EXIT_FAILURE);
 	}
-	n2 = atoi(argument);
 	new_node->n = n2;
 	new_node->prev = NULL;
 	if (!*stack)
