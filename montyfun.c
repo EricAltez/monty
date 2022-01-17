@@ -56,7 +56,6 @@ void m_pall(stack_t **stack, unsigned int line_number)
 	{
 		printf("%d\n", aux->n);
 		aux = aux->next;
-		printf("pallpr\n");
 	}
 }
 /**

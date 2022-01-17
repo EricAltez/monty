@@ -44,38 +44,42 @@ return (0);
  */
 int f_reader(FILE *fp, instruction_t op_list[])
 {
-	char *line = NULL;
+	char *line = NULL, *token = NULL;
 	unsigned int line_number = 0;
-	char *token = NULL;
 	size_t len = 0;
-	int i = 0, check = 0;
+	int i = 0, check = 0, tokenlen = 0, tokencmp = 0;
+	int oplen = 0;
 	stack_t *stack = NULL;
 
-	while (getline(&line, &len, fp) != -1)
+	while (1)
 	{
-		token = strtok(line, DELIM);
+		if (getline(&line, &len, fp) == -1)
+		{
+			free(line);
+			break;
+		}
 		line_number++;
-		i = 0;
-		check = 0;
-		if (token == NULL)
+		token = strtok(line, DELIM);
+		i = 0, check = 0;
+		if (token)
 		{
-			fprintf(stderr, "No token found");
-			exit(EXIT_FAILURE);
-		}
-		while (op_list[i].opcode)
-		{
-			if ((strcmp(token, op_list[i].opcode) == 0) &&
-				strlen(token) == strlen(op_list[i].opcode))
+			while (op_list[i].opcode)
 			{
-				op_list[i].f(&stack, line_number);
-				check = 1;
+				tokenlen = strlen(token);
+				oplen = strlen(op_list[i].opcode);
+				tokencmp = strcmp(token, op_list[i].opcode);
+				if ((tokenlen == oplen) && (tokencmp == 0))
+				{
+					op_list[i].f(&stack, line_number);
+					check = 1;
+				}
+				i++;
 			}
-			i++;
-		}
-		if (check == 0)
-		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
-			exit(EXIT_FAILURE);
+			if (check == 0)
+			{
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, token);
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 	free(line);
