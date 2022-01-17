@@ -8,21 +8,36 @@
 void m_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
-
-	(void)line_number;
+	int n2 = 0;
+	char *argument = NULL;
 
 	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = atoi(strtok(NULL, " "));
+	argument = strtok(NULL, DELIM);
+	if (argument == NULL || isdigit(argument) == 0)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free(new_node);
+		exit(EXIT_FAILURE);
+	}
+	n2 = atoi(argument);
+	new_node->n = n2;
 	new_node->prev = NULL;
-	new_node->next = *stack;
-	if (*stack)
+	if (!*stack)
+	{
+		new_node->next = NULL;
+		*stack = new_node;
+	}
+	else
+	{
+		new_node->next = *stack;
 		(*stack)->prev = new_node;
-	*stack = new_node;
-	printf("pushfun\n");
+		*stack = new_node;
+	}
+		printf("pushfun\n");
 }
 /**
  *m_pall - prints all the values on the stack
@@ -51,8 +66,22 @@ void m_pall(stack_t **stack, unsigned int line_number)
  */
 void m_pop(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	if (!stack || !*stack)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if (!(*stack)->next)
+	{
+		free(*stack);
+		*stack = NULL;
+	}
+	else
+	{
+		*stack = (*stack)->next;
+		free((*stack)->prev);
+		(*stack)->prev = NULL;
+	}
 	printf("pop\n");
 }
 /**
@@ -62,8 +91,17 @@ void m_pop(stack_t **stack, unsigned int line_number)
  */
 void m_swap(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	int x = 0, y = 0;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	x = (*stack)->n;
+	y = (*stack)->next->n;
+	(*stack)->n = y;
+	(*stack)->next->n = x;
 	printf("swap\n");
 }
 /**
@@ -73,7 +111,11 @@ void m_swap(stack_t **stack, unsigned int line_number)
  */
 void m_pint(stack_t **stack, unsigned int line_number)
 {
-	(void)stack;
-	(void)line_number;
+	if (!*stack)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 	printf("pint\n");
 }
